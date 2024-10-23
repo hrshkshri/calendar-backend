@@ -23,7 +23,7 @@ router.post(
   '/login',
   [
     check('email', 'Not valid email').isEmail(),
-    check('password', 'Password length must be greater that 4').isLength({ min: 5 }),
+    check('password', 'Password length must be greater that 5').isLength({ min: 5 }),
     validateFields,
   ],
   login
