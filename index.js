@@ -3,6 +3,9 @@ import express from 'express';
 import dbConnection from './database/config.js';
 import authRouter from './routes/auth.js';
 import eventsRouter from './routes/events.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
