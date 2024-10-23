@@ -5,7 +5,7 @@ const { dbConnection } = require('./database/config');
 
 const app = express();
 
-const PORT = process.env.port || 4000;
+const PORT = process.env.PORT || 4000;
 
 // Database
 dbConnection();
@@ -23,4 +23,4 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
 
-app.listen(4000, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
