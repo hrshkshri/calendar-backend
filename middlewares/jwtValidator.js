@@ -22,7 +22,7 @@ const validateJWT = (req = request, res = response, next) => {
   } catch (error) {
     return res.status(401).json({
       ok: false,
-      msg: 'Token not valid',
+      msg: 'Token not valid or expired',
     });
   }
 
