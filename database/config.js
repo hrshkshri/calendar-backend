@@ -4,6 +4,7 @@ const dbConnection = async () => {
   try {
     mongoose.set('strictQuery', false);
 
+    console.log('Connecting to database...');
     await mongoose.connect(process.env.DB_CONN);
 
     console.log('DB Online');

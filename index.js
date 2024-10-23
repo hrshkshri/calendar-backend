@@ -5,10 +5,11 @@ const { dbConnection } = require('./database/config');
 
 const app = express();
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 
-// Database
+//#region Database connection
 dbConnection();
+//#endregion
 
 // CORS
 app.use(cors());
@@ -19,8 +20,14 @@ app.use(express.static('public'));
 // Body parse middleware
 app.use(express.json());
 
-// Routes
+//#region Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/events', require('./routes/events'));
+//#endregion
+
+// Public content route
+app.get('*', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

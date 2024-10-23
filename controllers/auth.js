@@ -63,7 +63,7 @@ const login = async (req = request, res = response) => {
     if (!isValidPassword) {
       return res.status(400).json({
         ok: false,
-        msg: 'Incorrect password',
+        msg: 'Incorrect email or password',
       });
     }
 
