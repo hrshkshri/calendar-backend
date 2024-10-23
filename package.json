@@ -1,13 +1,14 @@
 {
   "name": "calendar-back",
   "description": "calendar app backend",
+  "author": "augusticor",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "node --watch --env-file=.env index.js",
     "start": "node --env-file=.env index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "augusticor",
   "dependencies": {
     "bcryptjs": "2.4.3",
     "cors": "2.8.5",

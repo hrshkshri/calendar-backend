@@ -1,7 +1,7 @@
-const { request, response } = require('express');
-const jwt = require('jsonwebtoken');
+import { request, response } from 'express';
+import jwt from 'jsonwebtoken';
 
-const validateJWT = (req = request, res = response, next) => {
+export const validateJWT = (req = request, res = response, next) => {
   // x-token coming in headers
   const token = req.header('x-token');
 
@@ -17,8 +17,6 @@ const validateJWT = (req = request, res = response, next) => {
 
     req.uid = payload.uid;
     req.name = payload.name;
-
-    //
   } catch (error) {
     return res.status(401).json({
       ok: false,
@@ -28,5 +26,3 @@ const validateJWT = (req = request, res = response, next) => {
 
   next();
 };
-
-module.exports = { validateJWT };

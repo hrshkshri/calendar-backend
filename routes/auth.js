@@ -1,11 +1,12 @@
 // User routes / Auth
 // host + /api/auth
-const { Router } = require('express');
+import { Router } from 'express';
+import { check } from 'express-validator';
+import { createUser, login, renewToken } from '../controllers/auth.js';
+import { validateFields } from '../middlewares/fieldsValidator.js';
+import { validateJWT } from '../middlewares/jwtValidator.js';
+
 const router = Router();
-const { check } = require('express-validator');
-const { createUser, login, renewToken } = require('../controllers/auth');
-const { validateFields } = require('../middlewares/fieldsValidator');
-const { validateJWT } = require('../middlewares/jwtValidator');
 
 router.post(
   '/new',
@@ -16,19 +17,15 @@ router.post(
     check('password', 'Password must have at least 5 characters').isLength({ min: 5 }),
     validateFields,
   ],
-  createUser
+  createUser,
 );
 
 router.post(
   '/login',
-  [
-    check('email', 'Not valid email').isEmail(),
-    check('password', 'Password length must be greater that 5').isLength({ min: 5 }),
-    validateFields,
-  ],
-  login
+  [check('email', 'Not valid email').isEmail(), check('password', 'Password length must be greater that 5').isLength({ min: 5 }), validateFields],
+  login,
 );
 
 router.get('/renew', validateJWT, renewToken);
 
-module.exports = router;
+export default router;

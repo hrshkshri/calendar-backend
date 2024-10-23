@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose');
+import { model, Schema } from 'mongoose';
 
 const EventSchema = Schema({
   title: {
@@ -30,4 +30,4 @@ EventSchema.method('toJSON', function () {
   return object;
 });
 
-module.exports = model('Event', EventSchema);
+export default model('Event', EventSchema);

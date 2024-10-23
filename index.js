@@ -1,6 +1,8 @@
-const express = require('express');
-const cors = require('cors');
-const { dbConnection } = require('./database/config');
+import cors from 'cors';
+import express from 'express';
+import dbConnection from './database/config.js';
+import authRouter from './routes/auth.js';
+import eventsRouter from './routes/events.js';
 
 const app = express();
 
@@ -20,12 +22,21 @@ app.use(express.static('public'));
 app.use(express.json());
 
 //#region Routes
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/events', require('./routes/events'));
+app.use('/api/auth', authRouter);
+app.use('/api/events', eventsRouter);
 //#endregion
+
+// Healt route
+app.get('/health', (req, res) => {
+  res.json({
+    ok: true,
+    msg: 'API is running',
+  });
+});
 
 // Public content route
 app.get('*', (req, res) => {
+  const __dirname = import.meta.dirname;
   res.sendFile(__dirname + '/public/index.html');
 });
 

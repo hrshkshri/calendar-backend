@@ -1,13 +1,13 @@
 // Events routes / Events
 // host + /api/events
-const { Router } = require('express');
+import { Router } from 'express';
+import { check } from 'express-validator';
 const router = Router();
-const { check } = require('express-validator');
 
-const { validateJWT } = require('../middlewares/jwtValidator');
-const { validateFields } = require('../middlewares/fieldsValidator');
-const { isDate } = require('../helpers/isDateValidator');
-const { createEvent, getEvents, updateEvent, deleteEvent } = require('../controllers/events');
+import { createEvent, deleteEvent, getEvents, updateEvent } from '../controllers/events.js';
+import { isDate } from '../helpers/isDateValidator.js';
+import { validateFields } from '../middlewares/fieldsValidator.js';
+import { validateJWT } from '../middlewares/jwtValidator.js';
 
 // High order middleware, all the routes use it
 router.use(validateJWT);
@@ -38,4 +38,4 @@ router.put(
 
 router.delete('/:id', deleteEvent);
 
-module.exports = router;
+export default router;

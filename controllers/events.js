@@ -1,7 +1,7 @@
-const { request, response } = require('express');
-const Event = require('../models/Event');
+import { request, response } from 'express';
+import Event from '../models/Event.js';
 
-const createEvent = async (req = request, res = response) => {
+export const createEvent = async (req = request, res = response) => {
   const event = new Event(req.body);
 
   try {
@@ -25,7 +25,7 @@ const createEvent = async (req = request, res = response) => {
   }
 };
 
-const getEvents = async (req = request, res = response) => {
+export const getEvents = async (req = request, res = response) => {
   try {
     const events = await Event.find().populate('user', 'name');
 
@@ -44,7 +44,7 @@ const getEvents = async (req = request, res = response) => {
   }
 };
 
-const updateEvent = async (req = request, res = response) => {
+export const updateEvent = async (req = request, res = response) => {
   const eventId = req.params.id;
   const uid = req.uid;
 
@@ -89,7 +89,7 @@ const updateEvent = async (req = request, res = response) => {
   }
 };
 
-const deleteEvent = async (req = request, res = response) => {
+export const deleteEvent = async (req = request, res = response) => {
   const eventId = req.params.id;
   const userId = req.uid;
 
@@ -126,5 +126,3 @@ const deleteEvent = async (req = request, res = response) => {
     });
   }
 };
-
-module.exports = { createEvent, getEvents, updateEvent, deleteEvent };

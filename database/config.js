@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+import { connect, set } from 'mongoose';
 
 const dbConnection = async () => {
   try {
-    mongoose.set('strictQuery', false);
+    set('strictQuery', false);
 
     console.log('Connecting to database...');
-    await mongoose.connect(process.env.DB_CONN);
+    await connect(process.env.DB_CONN);
 
     console.log('DB Online');
   } catch (error) {
@@ -14,4 +14,4 @@ const dbConnection = async () => {
   }
 };
 
-module.exports = { dbConnection };
+export default dbConnection;

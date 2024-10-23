@@ -1,9 +1,9 @@
-const { request, response } = require('express');
-const bcryptjs = require('bcryptjs');
-const User = require('../models/User');
-const { generateJWT } = require('../helpers/jwt');
+import bcryptjs from 'bcryptjs';
+import { request, response } from 'express';
+import { generateJWT } from '../helpers/jwt.js';
+import User from '../models/User.js';
 
-const createUser = async (req = request, res = response) => {
+export const createUser = async (req = request, res = response) => {
   const { email, password } = req.body;
 
   try {
@@ -44,7 +44,7 @@ const createUser = async (req = request, res = response) => {
   }
 };
 
-const login = async (req = request, res = response) => {
+export const login = async (req = request, res = response) => {
   const { email, password } = req.body;
 
   try {
@@ -87,7 +87,7 @@ const login = async (req = request, res = response) => {
   }
 };
 
-const renewToken = async (req = request, res = response) => {
+export const renewToken = async (req = request, res = response) => {
   const { uid, name } = req;
 
   const token = await generateJWT(uid, name);
@@ -100,5 +100,3 @@ const renewToken = async (req = request, res = response) => {
     name,
   });
 };
-
-module.exports = { createUser, login, renewToken };
